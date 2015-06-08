@@ -1,0 +1,4 @@
+*.obj
+Win32/
+GeneratedFiles/
+Debug/
