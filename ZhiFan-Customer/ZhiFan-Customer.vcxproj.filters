@@ -21,8 +21,327 @@
       <Extensions>cpp;moc</Extensions>
       <SourceControlFiles>False</SourceControlFiles>
     </Filter>
+    <Filter Include="network">
+      <UniqueIdentifier>{2e14cb14-2006-4b6c-8ec1-4f35a6e17450}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="packets">
+      <UniqueIdentifier>{43126280-4726-4ad4-b3dd-5048886bec48}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="packets\client">
+      <UniqueIdentifier>{2a822f7a-4fcb-4920-8f0a-c288b91c3694}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="packets\server">
+      <UniqueIdentifier>{254e80ae-06a0-485f-97f9-25726756b504}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="code">
+      <UniqueIdentifier>{d45ec8dc-8d47-4e9e-8531-298ae8cd382e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="widgets">
+      <UniqueIdentifier>{9d2b2d5e-3255-4821-be11-a1c3abf07961}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;cxx;c;def</Extensions>
+      <ParseFiles>true</ParseFiles>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h</Extensions>
+      <ParseFiles>true</ParseFiles>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp" />
+    <ClCompile Include="network\InstantiationPacketHelper.cpp">
+      <Filter>network</Filter>
+    </ClCompile>
+    <ClCompile Include="code\stdafx.cpp">
+      <Filter>code</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>code</Filter>
+    </ClCompile>
+    <ClCompile Include="code\AbstractParseJson.cpp">
+      <Filter>code</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_AbstractParseJson.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_AbstractParseJson.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="code\Error.cpp">
+      <Filter>code</Filter>
+    </ClCompile>
+    <ClCompile Include="code\Packet.cpp">
+      <Filter>code</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_Packet.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_Packet.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_Range.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_Range.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="code\SettingHelper.cpp">
+      <Filter>code</Filter>
+    </ClCompile>
+    <ClCompile Include="code\SettingInfo.cpp">
+      <Filter>code</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_SettingInfo.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_SettingInfo.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_ApplaudZhiFan.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_ApplaudZhiFan.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_CommentResponse.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_CommentResponse.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_CompleteZhiFan.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_CompleteZhiFan.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_GetOneZhiFanPublish.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_GetOneZhiFanPublish.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_GetZhiFanPublishPageOfRange.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_GetZhiFanPublishPageOfRange.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_Identity.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_Identity.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_Login.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_Login.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_PublishZhiFan.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_PublishZhiFan.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_PullUserCenter.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_PullUserCenter.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_Register.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_Register.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_ResponseZhiFan.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_ResponseZhiFan.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_SearchZhiFan.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_SearchZhiFan.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_ResponseGetOneZhiFanPublish.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_ResponseGetOneZhiFanPublish.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_ResponseGetZhiFanPublishPageOfRange.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_ResponseGetZhiFanPublishPageOfRange.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_ResponseLogin.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_ResponseLogin.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_ResponsePullUserCenter.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_ResponsePullUserCenter.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_ResponseSearchZhiFan.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_ResponseSearchZhiFan.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_ServerBackPacket.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_ServerBackPacket.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_ZhiFanPublishBriefOne.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_ZhiFanPublishBriefOne.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_ZhiFanPublishOne.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_ZhiFanPublishOne.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_TerminalWidget.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_TerminalWidget.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="widgets\TerminalWidget.cpp">
+      <Filter>widgets</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_SearchWidget.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_SearchWidget.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="widgets\SearchWidget.cpp">
+      <Filter>widgets</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="network\InstantiationPacketHelper.h">
+      <Filter>network</Filter>
+    </ClInclude>
+    <ClInclude Include="network\packets.h">
+      <Filter>network</Filter>
+    </ClInclude>
+    <ClInclude Include="code\stdafx.h">
+      <Filter>code</Filter>
+    </ClInclude>
+    <ClInclude Include="code\defs.h">
+      <Filter>code</Filter>
+    </ClInclude>
+    <ClInclude Include="code\Error.h">
+      <Filter>code</Filter>
+    </ClInclude>
+    <ClInclude Include="code\NetCommunicationProtocol.h">
+      <Filter>code</Filter>
+    </ClInclude>
+    <ClInclude Include="code\SettingHelper.h">
+      <Filter>code</Filter>
+    </ClInclude>
+    <ClInclude Include="code\ClientDataStructure_defs.h">
+      <Filter>code</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="code\AbstractParseJson.h">
+      <Filter>code</Filter>
+    </CustomBuild>
+    <CustomBuild Include="code\Packet.h">
+      <Filter>code</Filter>
+    </CustomBuild>
+    <CustomBuild Include="code\Range.h">
+      <Filter>code</Filter>
+    </CustomBuild>
+    <CustomBuild Include="code\SettingInfo.h">
+      <Filter>code</Filter>
+    </CustomBuild>
+    <CustomBuild Include="packets\client\ApplaudZhiFan.h">
+      <Filter>packets\client</Filter>
+    </CustomBuild>
+    <CustomBuild Include="packets\client\CommentResponse.h">
+      <Filter>packets\client</Filter>
+    </CustomBuild>
+    <CustomBuild Include="packets\client\CompleteZhiFan.h">
+      <Filter>packets\client</Filter>
+    </CustomBuild>
+    <CustomBuild Include="packets\client\GetOneZhiFanPublish.h">
+      <Filter>packets\client</Filter>
+    </CustomBuild>
+    <CustomBuild Include="packets\client\GetZhiFanPublishPageOfRange.h">
+      <Filter>packets\client</Filter>
+    </CustomBuild>
+    <CustomBuild Include="packets\client\Identity.h">
+      <Filter>packets\client</Filter>
+    </CustomBuild>
+    <CustomBuild Include="packets\client\Login.h">
+      <Filter>packets\client</Filter>
+    </CustomBuild>
+    <CustomBuild Include="packets\client\PublishZhiFan.h">
+      <Filter>packets\client</Filter>
+    </CustomBuild>
+    <CustomBuild Include="packets\client\PullUserCenter.h">
+      <Filter>packets\client</Filter>
+    </CustomBuild>
+    <CustomBuild Include="packets\client\Register.h">
+      <Filter>packets\client</Filter>
+    </CustomBuild>
+    <CustomBuild Include="packets\client\ResponseZhiFan.h">
+      <Filter>packets\client</Filter>
+    </CustomBuild>
+    <CustomBuild Include="packets\client\SearchZhiFan.h">
+      <Filter>packets\client</Filter>
+    </CustomBuild>
+    <CustomBuild Include="packets\server\ResponseGetOneZhiFanPublish.h">
+      <Filter>packets\server</Filter>
+    </CustomBuild>
+    <CustomBuild Include="packets\server\ResponseGetZhiFanPublishPageOfRange.h">
+      <Filter>packets\server</Filter>
+    </CustomBuild>
+    <CustomBuild Include="packets\server\ResponseLogin.h">
+      <Filter>packets\server</Filter>
+    </CustomBuild>
+    <CustomBuild Include="packets\server\ResponsePullUserCenter.h">
+      <Filter>packets\server</Filter>
+    </CustomBuild>
+    <CustomBuild Include="packets\server\ResponseSearchZhiFan.h">
+      <Filter>packets\server</Filter>
+    </CustomBuild>
+    <CustomBuild Include="packets\server\ServerBackPacket.h">
+      <Filter>packets\server</Filter>
+    </CustomBuild>
+    <CustomBuild Include="packets\server\ZhiFanPublishBriefOne.h">
+      <Filter>packets\server</Filter>
+    </CustomBuild>
+    <CustomBuild Include="packets\server\ZhiFanPublishOne.h">
+      <Filter>packets\server</Filter>
+    </CustomBuild>
+    <CustomBuild Include="widgets\TerminalWidget.h">
+      <Filter>widgets</Filter>
+    </CustomBuild>
+    <CustomBuild Include="widgets\SearchWidget.h">
+      <Filter>widgets</Filter>
+    </CustomBuild>
   </ItemGroup>
 </Project>
