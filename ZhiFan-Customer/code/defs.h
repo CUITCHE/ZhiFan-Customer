@@ -14,9 +14,11 @@
 #define GET_SETTER(Type,variable, name)\
 	SETTER(Type,variable, name)\
 	GETTER(Type,variable,name)
+
 #define QT_MOC_GET_SETTER(Type, variable, name)\
 	GET_SETTER(Type, variable, name)\
 	Q_PROPERTY(Type variable READ get##name WRITE set##name)\
+
 
 //把定义变量和QT的MOC PROPERTY宏声明结合在一起，
 //呃，我是个大懒鬼-_-...
@@ -73,5 +75,13 @@ inline void ___pop(){ Instance::deleteInstance(); }
 #undef Q_lock
 #endif // Q_lock
 #define Q_lock(mutex) QMutexLocker locker(mutex)
+
+#define __normal_getsetter(Type,variable)\
+	Type& variable(){Q_lock(mtx); return _##variable;}
+
+
+#define ENTITY_MEMBER_DEFINITION(Type, variable)\
+	private:Type _##variable;\
+	public:__normal_getsetter(Type, variable)
 
 #endif // DEFS_H

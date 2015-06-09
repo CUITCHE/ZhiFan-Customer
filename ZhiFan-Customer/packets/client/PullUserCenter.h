@@ -22,6 +22,7 @@ PACKET_STRUCTION(PullUserCenter)
 QT_MOC_MINE_DEFINITION(int, userid, Userid);
 //type：int：0普通系统消息推送，1所关注的知返有新的回答，2您的回答有新的评论，3您评论的回答有新的评论
 QT_MOC_MINE_DEFINITION(int, type, Type);
-
+//briefmsg：string：信息摘要（id为0时，是详细信息）
+QT_MOC_MINE_DEFINITION(QString, briefmsg, Briefmsg);
 PACKET_DEFINITION_END
 #endif // PullUserCenter_H__

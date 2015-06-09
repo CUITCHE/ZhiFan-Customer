@@ -12,7 +12,7 @@
 	*********************************************************************/
 
 namespace net{
-	enum NetCommunicationProtocol :unsigned int{
+	enum NetCommunicationProtocol{
 		Empty,
 		Test,
 		//客户端协议
@@ -65,7 +65,8 @@ namespace net{
 
 	};
 #define Case(V) case V: return #V
-	static const char *ProtocolToString(unsigned int val){
+	static const char *ProtocolToString(unsigned int val)
+	{
 		switch (val)
 		{
 			Case(Empty);
@@ -96,7 +97,8 @@ namespace net{
 #undef Case
 
 #define Case(V) case V:return V
-	static NetCommunicationProtocol protocol_cast(unsigned int val){
+	static NetCommunicationProtocol protocol_cast(unsigned int val)
+	{
 		switch (val)
 		{
 			Case(Empty);
@@ -125,6 +127,36 @@ namespace net{
 		return Empty;
 	}
 #undef Case
+#define Case(V,CN) case V:return #CN;
+	static const char* ProtocolToCNString(unsigned int val)
+	{
+		switch (val)
+		{
+			Case(Empty, 空);
+			Case(Test, 测试);
+			Case(Register, 注册);
+			Case(Login, 登陆);
+			Case(Identity, 实名认证);
+			Case(PublishZhiFan, 发布);
+			Case(ResponseZhiFan, 回答);
+			Case(CommentResponse, 评论);
+			Case(CompleteZhiFan, 完成);
+			Case(ApplaudZhiFan,);
+			Case(GetZhiFanPublishPageOfRange, 获取内容);
+			Case(GetOneZhiFanPublish, 获取具体内容);
+			Case(SearchZhiFan, 搜索);
+			Case(PullUserCenter, 拉取);
+			Case(ServerBack,);
+			Case(ResponseLogin,);
+			Case(ResponsePullUserCenter,);
+			Case(ResponseGetZhiFanPublishPageOfRange,);
+			Case(ResponseSearchZhiFan,);
+			Case(ZhiFanPublishOne,);
+		default:
+			return "default";
+		}
+	}
+#undef  Case
 	const int MAX_PROTOCOL = MAX;
 }
 
