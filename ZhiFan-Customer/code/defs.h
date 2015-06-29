@@ -43,7 +43,7 @@
 
 #define PREPARE_INSTANCE_DEFINITION(Class) Class* Class::g_instance=nullptr; \
 	void Class::checkInstance(){if (g_instance == nullptr){\
-	static std::once_flag flag_##Class;\
+	std::once_flag flag_##Class;\
 	std::call_once(flag_##Class,[&](){g_instance = new Class;});}}\
 	Class* Class::instance(){ checkInstance(); return g_instance; }\
 	void Class::deleteInstance(){ delete g_instance; g_instance = nullptr; }\
@@ -77,8 +77,8 @@ inline void ___pop(){ Instance::deleteInstance(); }
 #define Q_lock(mutex) QMutexLocker locker(mutex)
 
 #define __normal_getsetter(Type,variable)\
+	const Type& variable()const{return _##variable;}\
 	Type& variable(){Q_lock(mtx); return _##variable;}
-
 
 #define ENTITY_MEMBER_DEFINITION(Type, variable)\
 	private:Type _##variable;\

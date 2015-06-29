@@ -44,7 +44,7 @@ void Factory::addPublishInDetail(const Packet *pck)
 	auto p = dynamic_cast<const ZhiFanPublishOnePacket*>(pck);
 	Q_ASSERT(p);
 	auto iter = publishInDetail->find(p->getPublishId());
-	if (iter == publishInDetail->end()){
+	if (iter != publishInDetail->end()){
 		return;
 	}
 	PublishOneEntity *entity = new PublishOneEntity;
@@ -78,7 +78,7 @@ void Factory::addPublishBrief(const Packet *pck)
 	auto p = dynamic_cast<const ZhiFanPublishBriefOnePacket*>(pck);
 	Q_ASSERT(p);
 	auto iter = publishBrief->find(p->getPublishId());
-	if (iter == publishBrief->end()){
+	if (iter != publishBrief->end()){
 		return;
 	}
 	PublishBriefOneEntity *entity = new PublishBriefOneEntity;

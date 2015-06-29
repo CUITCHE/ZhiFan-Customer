@@ -20,6 +20,7 @@ class QLineEdit;
 class QPushButton;
 class QGridLayout;
 class QTimeLine;
+class QGraphicsOpacityEffect;
 
 enum ShowOrder
 {
@@ -59,6 +60,8 @@ private:
 	//¶¯»­¿ØÖÆ
 	ShowOrder animationOrder;
 	QTimeLine *timeLine;
+	QGraphicsOpacityEffect *opacityForCityBox;
+	QGraphicsOpacityEffect *opacityForDistrictBox;
 };
 
 #endif // SEARCHWIDGET_H

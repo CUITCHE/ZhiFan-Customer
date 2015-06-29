@@ -52,6 +52,12 @@
     <Filter Include="entity">
       <UniqueIdentifier>{1d34a536-4a83-4b01-87f3-21c06fb7bda8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="utils">
+      <UniqueIdentifier>{d402f10f-5e4f-437d-a071-abb537a285cf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="widgets\detail">
+      <UniqueIdentifier>{b8a6ebac-f899-4581-a9cd-0131f36d2cd2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="network\InstantiationPacketHelper.cpp">
@@ -100,6 +106,129 @@
       <Filter>Generated Files\Debug</Filter>
     </ClCompile>
     <ClCompile Include="GeneratedFiles\Release\moc_SettingInfo.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_TerminalWidget.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_TerminalWidget.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="widgets\TerminalWidget.cpp">
+      <Filter>widgets</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_SearchWidget.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_SearchWidget.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="widgets\SearchWidget.cpp">
+      <Filter>widgets</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_NetworkDataWorker.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_NetworkDataWorker.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="network\Network.cpp">
+      <Filter>network</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_Network.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_Network.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="network\NetworkDataWorker.cpp">
+      <Filter>network</Filter>
+    </ClCompile>
+    <ClCompile Include="entity\UserEntity.cpp">
+      <Filter>entity</Filter>
+    </ClCompile>
+    <ClCompile Include="entity\UserCenterEntity.cpp">
+      <Filter>entity</Filter>
+    </ClCompile>
+    <ClCompile Include="entity\Entity.cpp">
+      <Filter>entity</Filter>
+    </ClCompile>
+    <ClCompile Include="entity\PublishOneEntity.cpp">
+      <Filter>entity</Filter>
+    </ClCompile>
+    <ClCompile Include="entity\PublishBriefOneEntity.cpp">
+      <Filter>entity</Filter>
+    </ClCompile>
+    <ClCompile Include="entity\Factory.cpp">
+      <Filter>entity</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_ZhiFanBriefFrame.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_ZhiFanBriefFrame.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="widgets\ZhiFanBriefFrame.cpp">
+      <Filter>widgets</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_ImageCarouselFrame.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_ImageCarouselFrame.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="widgets\ImageCarouselFrame.cpp">
+      <Filter>widgets</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\qrc_zhifan.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_ResponseGetOneZhiFanPublish.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_ResponseGetOneZhiFanPublish.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_ResponseGetZhiFanPublishPageOfRange.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_ResponseGetZhiFanPublishPageOfRange.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_ResponseLogin.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_ResponseLogin.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_ResponsePullUserCenter.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_ResponsePullUserCenter.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_ResponseSearchZhiFan.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_ResponseSearchZhiFan.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_ServerBackPacket.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_ServerBackPacket.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_ZhiFanPublishBriefOne.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_ZhiFanPublishBriefOne.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_ZhiFanPublishOne.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_ZhiFanPublishOne.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
     <ClCompile Include="GeneratedFiles\Debug\moc_ApplaudZhiFan.cpp">
@@ -174,107 +303,80 @@
     <ClCompile Include="GeneratedFiles\Release\moc_SearchZhiFan.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_ResponseGetOneZhiFanPublish.cpp">
+    <ClCompile Include="GeneratedFiles\Debug\moc_MaskFrame.cpp">
       <Filter>Generated Files\Debug</Filter>
     </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_ResponseGetOneZhiFanPublish.cpp">
+    <ClCompile Include="GeneratedFiles\Release\moc_MaskFrame.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_ResponseGetZhiFanPublishPageOfRange.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_ResponseGetZhiFanPublishPageOfRange.cpp">
-      <Filter>Generated Files\Release</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_ResponseLogin.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_ResponseLogin.cpp">
-      <Filter>Generated Files\Release</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_ResponsePullUserCenter.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_ResponsePullUserCenter.cpp">
-      <Filter>Generated Files\Release</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_ResponseSearchZhiFan.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_ResponseSearchZhiFan.cpp">
-      <Filter>Generated Files\Release</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_ServerBackPacket.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_ServerBackPacket.cpp">
-      <Filter>Generated Files\Release</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_ZhiFanPublishBriefOne.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_ZhiFanPublishBriefOne.cpp">
-      <Filter>Generated Files\Release</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_ZhiFanPublishOne.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_ZhiFanPublishOne.cpp">
-      <Filter>Generated Files\Release</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_TerminalWidget.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_TerminalWidget.cpp">
-      <Filter>Generated Files\Release</Filter>
-    </ClCompile>
-    <ClCompile Include="widgets\TerminalWidget.cpp">
+    <ClCompile Include="widgets\MaskFrame.cpp">
       <Filter>widgets</Filter>
     </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_SearchWidget.cpp">
+    <ClCompile Include="GeneratedFiles\Debug\moc_DisplayZhiFanBoard.cpp">
       <Filter>Generated Files\Debug</Filter>
     </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_SearchWidget.cpp">
+    <ClCompile Include="GeneratedFiles\Release\moc_DisplayZhiFanBoard.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
-    <ClCompile Include="widgets\SearchWidget.cpp">
+    <ClCompile Include="widgets\DisplayZhiFanBoard.cpp">
       <Filter>widgets</Filter>
     </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_NetworkDataWorker.cpp">
+    <ClCompile Include="utils\Utils.cpp">
+      <Filter>utils</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_DisplayBoardItemsForColumn.cpp">
       <Filter>Generated Files\Debug</Filter>
     </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_NetworkDataWorker.cpp">
+    <ClCompile Include="GeneratedFiles\Release\moc_DisplayBoardItemsForColumn.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
-    <ClCompile Include="network\Network.cpp">
-      <Filter>network</Filter>
+    <ClCompile Include="widgets\DisplayBoardItemsForColumn.cpp">
+      <Filter>widgets</Filter>
     </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_Network.cpp">
+    <ClCompile Include="widgets\detail\DetailedBoard.cpp">
+      <Filter>widgets\detail</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_DetailedBoard.cpp">
       <Filter>Generated Files\Debug</Filter>
     </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_Network.cpp">
+    <ClCompile Include="GeneratedFiles\Release\moc_DetailedBoard.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
-    <ClCompile Include="network\NetworkDataWorker.cpp">
-      <Filter>network</Filter>
+    <ClCompile Include="GeneratedFiles\Debug\moc_ImageBoard.cpp">
+      <Filter>Generated Files\Debug</Filter>
     </ClCompile>
-    <ClCompile Include="entity\UserEntity.cpp">
-      <Filter>entity</Filter>
+    <ClCompile Include="GeneratedFiles\Release\moc_ImageBoard.cpp">
+      <Filter>Generated Files\Release</Filter>
     </ClCompile>
-    <ClCompile Include="entity\UserCenterEntity.cpp">
-      <Filter>entity</Filter>
+    <ClCompile Include="widgets\detail\ImageBoard.cpp">
+      <Filter>widgets\detail</Filter>
     </ClCompile>
-    <ClCompile Include="entity\Entity.cpp">
-      <Filter>entity</Filter>
+    <ClCompile Include="GeneratedFiles\Debug\moc_ThumbnailBoard.cpp">
+      <Filter>Generated Files\Debug</Filter>
     </ClCompile>
-    <ClCompile Include="entity\PublishOneEntity.cpp">
-      <Filter>entity</Filter>
+    <ClCompile Include="GeneratedFiles\Release\moc_ThumbnailBoard.cpp">
+      <Filter>Generated Files\Release</Filter>
     </ClCompile>
-    <ClCompile Include="entity\PublishBriefOneEntity.cpp">
-      <Filter>entity</Filter>
+    <ClCompile Include="widgets\detail\ThumbnailBoard.cpp">
+      <Filter>widgets\detail</Filter>
     </ClCompile>
-    <ClCompile Include="entity\Factory.cpp">
-      <Filter>entity</Filter>
+    <ClCompile Include="GeneratedFiles\Debug\moc_HLabel.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_HLabel.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="widgets\detail\HLabel.cpp">
+      <Filter>widgets\detail</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_CommentBoard.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_CommentBoard.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="widgets\detail\CommentBoard.cpp">
+      <Filter>widgets\detail</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -320,6 +422,12 @@
     <ClInclude Include="entity\Factory.h">
       <Filter>entity</Filter>
     </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="utils\Utils.h">
+      <Filter>utils</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="code\AbstractParseJson.h">
@@ -333,6 +441,51 @@
     </CustomBuild>
     <CustomBuild Include="code\SettingInfo.h">
       <Filter>code</Filter>
+    </CustomBuild>
+    <CustomBuild Include="widgets\TerminalWidget.h">
+      <Filter>widgets</Filter>
+    </CustomBuild>
+    <CustomBuild Include="widgets\SearchWidget.h">
+      <Filter>widgets</Filter>
+    </CustomBuild>
+    <CustomBuild Include="network\Network.h">
+      <Filter>network</Filter>
+    </CustomBuild>
+    <CustomBuild Include="network\NetworkDataWorker.h">
+      <Filter>network</Filter>
+    </CustomBuild>
+    <CustomBuild Include="widgets\ZhiFanBriefFrame.h">
+      <Filter>widgets</Filter>
+    </CustomBuild>
+    <CustomBuild Include="widgets\ImageCarouselFrame.h">
+      <Filter>widgets</Filter>
+    </CustomBuild>
+    <CustomBuild Include="Resources\zhifan.qrc">
+      <Filter>Resource Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="packets\server\ResponseGetOneZhiFanPublish.h">
+      <Filter>packets\server</Filter>
+    </CustomBuild>
+    <CustomBuild Include="packets\server\ResponseGetZhiFanPublishPageOfRange.h">
+      <Filter>packets\server</Filter>
+    </CustomBuild>
+    <CustomBuild Include="packets\server\ResponseLogin.h">
+      <Filter>packets\server</Filter>
+    </CustomBuild>
+    <CustomBuild Include="packets\server\ResponsePullUserCenter.h">
+      <Filter>packets\server</Filter>
+    </CustomBuild>
+    <CustomBuild Include="packets\server\ResponseSearchZhiFan.h">
+      <Filter>packets\server</Filter>
+    </CustomBuild>
+    <CustomBuild Include="packets\server\ServerBackPacket.h">
+      <Filter>packets\server</Filter>
+    </CustomBuild>
+    <CustomBuild Include="packets\server\ZhiFanPublishBriefOne.h">
+      <Filter>packets\server</Filter>
+    </CustomBuild>
+    <CustomBuild Include="packets\server\ZhiFanPublishOne.h">
+      <Filter>packets\server</Filter>
     </CustomBuild>
     <CustomBuild Include="packets\client\ApplaudZhiFan.h">
       <Filter>packets\client</Filter>
@@ -370,41 +523,32 @@
     <CustomBuild Include="packets\client\SearchZhiFan.h">
       <Filter>packets\client</Filter>
     </CustomBuild>
-    <CustomBuild Include="packets\server\ResponseGetOneZhiFanPublish.h">
-      <Filter>packets\server</Filter>
-    </CustomBuild>
-    <CustomBuild Include="packets\server\ResponseGetZhiFanPublishPageOfRange.h">
-      <Filter>packets\server</Filter>
-    </CustomBuild>
-    <CustomBuild Include="packets\server\ResponseLogin.h">
-      <Filter>packets\server</Filter>
-    </CustomBuild>
-    <CustomBuild Include="packets\server\ResponsePullUserCenter.h">
-      <Filter>packets\server</Filter>
-    </CustomBuild>
-    <CustomBuild Include="packets\server\ResponseSearchZhiFan.h">
-      <Filter>packets\server</Filter>
-    </CustomBuild>
-    <CustomBuild Include="packets\server\ServerBackPacket.h">
-      <Filter>packets\server</Filter>
-    </CustomBuild>
-    <CustomBuild Include="packets\server\ZhiFanPublishBriefOne.h">
-      <Filter>packets\server</Filter>
-    </CustomBuild>
-    <CustomBuild Include="packets\server\ZhiFanPublishOne.h">
-      <Filter>packets\server</Filter>
-    </CustomBuild>
-    <CustomBuild Include="widgets\TerminalWidget.h">
+    <CustomBuild Include="widgets\MaskFrame.h">
       <Filter>widgets</Filter>
     </CustomBuild>
-    <CustomBuild Include="widgets\SearchWidget.h">
+    <CustomBuild Include="widgets\DisplayZhiFanBoard.h">
       <Filter>widgets</Filter>
     </CustomBuild>
-    <CustomBuild Include="network\Network.h">
-      <Filter>network</Filter>
+    <CustomBuild Include="widgets\DisplayBoardItemsForColumn.h">
+      <Filter>widgets</Filter>
     </CustomBuild>
-    <CustomBuild Include="network\NetworkDataWorker.h">
-      <Filter>network</Filter>
+    <CustomBuild Include="widgets\detail\DetailedBoard.h">
+      <Filter>widgets\detail</Filter>
     </CustomBuild>
+    <CustomBuild Include="widgets\detail\ImageBoard.h">
+      <Filter>widgets\detail</Filter>
+    </CustomBuild>
+    <CustomBuild Include="widgets\detail\ThumbnailBoard.h">
+      <Filter>widgets\detail</Filter>
+    </CustomBuild>
+    <CustomBuild Include="widgets\detail\HLabel.h">
+      <Filter>widgets\detail</Filter>
+    </CustomBuild>
+    <CustomBuild Include="widgets\detail\CommentBoard.h">
+      <Filter>widgets\detail</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="ZhiFan-Customer.rc" />
   </ItemGroup>
 </Project>

@@ -1,12 +1,14 @@
 #include "stdafx.h"
 #include "TerminalWidget.h"
 #include "SearchWidget.h"
+#include "DisplayZhiFanBoard.h"
+#include "Utils.h"
 TerminalWidget::TerminalWidget(const QSize &frame, QWidget *parent /*= 0*/)
 	:QWidget(parent)
 	, mainLayout(new QVBoxLayout)
 {
+	this->setFixedSize(frame);
 	initWidget();
-	this->setMinimumSize(frame);
 }
 
 TerminalWidget::~TerminalWidget()
@@ -48,6 +50,9 @@ void TerminalWidget::initWidget()
 
 	//row3
 	QHBoxLayout *row3 = new QHBoxLayout;
+	displayBoard = new DisplayZhiFanBoard(this);
+	displayBoard->setFixedSize(this->width(), this->height()*0.7);
+	row3->addWidget(displayBoard);
 
 	//row4
 	QHBoxLayout *row4 = new QHBoxLayout;
@@ -60,4 +65,6 @@ void TerminalWidget::initWidget()
 	mainLayout->addLayout(row4);
 
 	this->setLayout(mainLayout.get());
+
+	QTimer::singleShot(1000, [&](){displayBoard->addItems(utils::getdata()); });
 }

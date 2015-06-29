@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "SearchWidget.h"
-
+const int FrameRange = 86;
 SearchWidget::SearchWidget(QWidget *parent)
 	: QWidget(parent)
 	, mainLayout(new QGridLayout)
@@ -29,12 +29,16 @@ void SearchWidget::initWidget()
 	cityBox->setFixedWidth(80);
 	cityBox->addItem(tr("请选择"), 0);
 	cityBox->addItem(tr("双流"), 1);
+	opacityForCityBox = new QGraphicsOpacityEffect(cityBox);
+	cityBox->setGraphicsEffect(opacityForCityBox);
 	cityBox->setEditable(false);
 	cityBox->hide();
 	//区
 	districtBox = new QComboBox;
 	districtBox->setFixedWidth(80);
 	districtBox->addItem(tr("请选择"), 0);
+	opacityForDistrictBox = new QGraphicsOpacityEffect(districtBox);
+	districtBox->setGraphicsEffect(opacityForDistrictBox);
 	districtBox->setEditable(false);
 	districtBox->hide();
 
@@ -55,7 +59,7 @@ void SearchWidget::initWidget()
 	this->setLayout(mainLayout.get());
 
 	//GUI无关 设置
-	timeLine->setFrameRange(0, 86);
+	timeLine->setFrameRange(0, FrameRange);
 	
 	connect(timeLine, &QTimeLine::frameChanged, this, &SearchWidget::onTimeLineFrameChanged);
 	connect(timeLine, &QTimeLine::finished, this, &SearchWidget::onTimeLineFinished);
@@ -122,13 +126,19 @@ void SearchWidget::showCity(int frame)
 	}
 	auto pos = provinceBox->pos();
 	cityBox->move(QPoint{ pos.x() + frame, pos.y() });
+	opacityForCityBox->setOpacity(frame*1.0f / FrameRange);
 }
 
 void SearchWidget::hideCity(int frame)
 {
-	cityBox->move(QPoint{ cityBox->pos().x() - frame, provinceBox->pos().y() });
+	QPoint pos{ provinceBox->x() + provinceBox->width() - frame, provinceBox->y() };
+
+	cityBox->move(pos);
+	opacityForCityBox->setOpacity(frame*1.0f / FrameRange);
 	if (districtBox->isHidden() == false){
-		districtBox->move(QPoint{ districtBox->pos().x() - frame, provinceBox->pos().y() });
+		pos += QPoint{ cityBox->width(), 0 };
+		districtBox->move(pos);
+		opacityForDistrictBox->setOpacity(frame*1.0f / FrameRange);
 	}
 }
 
@@ -138,12 +148,18 @@ void SearchWidget::showDistrict(int frame)
 		districtBox->move(provinceBox->pos());
 		districtBox->show();
 	}
-	districtBox->move(QPoint{ cityBox->pos().x() + frame, cityBox->pos().y() });
+
+	districtBox->move(QPoint{ cityBox->x() + frame, cityBox->y() });
+	opacityForDistrictBox->setOpacity(frame*1.0f / FrameRange);
 }
 
 void SearchWidget::hideDistrict(int frame)
 {
-	districtBox->move(QPoint{ districtBox->pos().x() - frame, cityBox->pos().y() });
+	if (cityBox->isHidden()==false){
+
+		districtBox->move(QPoint{ cityBox->x() + cityBox->width() - frame, cityBox->y() });
+		opacityForDistrictBox->setOpacity(frame*1.0f / FrameRange);
+	}
 }
 
 void SearchWidget::onComboBoxCurrentIndexChanged(int index)

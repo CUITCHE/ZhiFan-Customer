@@ -8,8 +8,9 @@ void UserEntity::update_impl(const Packet *pck)
 	Q_ASSERT(!p);
 	__lock__;
 	_identification = p->getIdentification();
-	_idCardSubstring = p->getIDCardSubstring().right(7);
+	_idCardSubstring = p->getIDCardSubstring();
 	_zfb = p->getZfb();
 	_userid = p->getUserid();
+	_gender = (((p->getIDCardSubstring().at(16).toLatin1() - '0') & 1) ? true : false);
 }
 

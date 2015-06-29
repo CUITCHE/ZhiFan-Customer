@@ -16,6 +16,8 @@ class QVBoxLayout;
 class QPushButton;
 class QLabel;
 class SearchWidget;
+class DisplayZhiFanBoard;
+
 class TerminalWidget : public QWidget
 {
 	Q_OBJECT
@@ -40,7 +42,8 @@ private:
 	/*您有新消息未查看，此处为自定义控件【暂时未写】*/
 
 	//row3 控件声明处
-	/*显示知返，以“花瓣”网站的风格显示，此处为自定义控件【暂时未写】*/
+	/*显示知返，以“花瓣”网站的风格显示，此处为自定义控件*/
+	DisplayZhiFanBoard *displayBoard;
 
 	//row4 第一列 控件声明处
 	/*搜索控件，自定义控件*/
