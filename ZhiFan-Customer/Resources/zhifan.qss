@@ -1,0 +1,140 @@
+/*TerminaWidget*/
+QPushButton#closeBtn{
+	border-image:url(:/closeBtn.png);
+}
+QPushButton#extendBtn{
+	border-image:url(:/extendBtn.png);
+}
+QPushButton#narrowBtn{
+	border-image:url(:/narrowBtn.png);
+}
+QLabel#logoLabel{
+	border-image:url(:/logo.png);
+}
+QPushButton#userHeaderBtn{
+	border-image:url(:/user.png);
+}
+
+/*µ¥¸ö¼òÔ¼Öª·µ½çÃæ*/
+QLabel#BriefFrameTitle{
+	font:bold;
+	font-size:30px;
+	color:white;
+	font-family:Î¢ÈíÑÅºÚ;
+}
+
+QLabel#responseNum{
+	font-size:14px;
+	color:white;
+	font-family:Î¢ÈíÑÅºÚ;
+	background-image: url(:/bg2.png);
+}
+QLabel#describeMsg{
+	background-image: url(:/background.png);
+}
+QLabel#responseMuchOfAppluad{
+	background-image: url(:/background.png);
+}
+
+/*Öª·µÏêÏ¸½çÃæ*/
+QLabel#titleZhiFan{
+	font:bold;
+	font-size:30px;
+	color:white;
+	font-family:Î¢ÈíÑÅºÚ;
+}
+
+QLabel#userBriefName{
+	font-size:14px;
+	color:white;
+	font-family:Î¢ÈíÑÅºÚ;
+	background-image: url(:/bg2.png);
+}
+
+QPushButton#flagZhiFanBtn:!hover{
+	
+	font-size:20px;
+	font-family:Î¢ÈíÑÅºÚ;
+	border:1px solid gray;
+	border-radius:5px;
+}
+QPushButton#flagZhiFanBtn:hover{
+	
+	font-size:20px;
+	font-family:Î¢ÈíÑÅºÚ;
+	border:1px solid #0074CC;
+	border-radius:5px;
+}
+QPushButton#flagZhiFanBtn:pressed{
+	
+	font-size:20px;
+	font-family:Î¢ÈíÑÅºÚ;
+	border-radius:5px;
+	border:1px solid white;
+}
+
+/*Öª·µÏêÏ¸½çÃæµÄ ÓÒ²¼¾Ö*/
+QPushButton#apprecoateBtn:!hover{
+	font-size:14px;
+	color:gray;
+	font-family:Î¢ÈíÑÅºÚ;
+	border:0px;
+}
+
+QPushButton#apprecoateBtn:hover{
+	font-size:14px;
+	color:#0074CC;
+	font-family:Î¢ÈíÑÅºÚ;
+	border:0px;
+	text-decoration:underline;
+}
+QPushButton#apprecoateBtn:pressed{
+	font-size:14px;
+	color:white;
+	font-family:Î¢ÈíÑÅºÚ;
+	border:0px;
+	text-decoration:underline;
+}
+
+QPushButton#appluadBtn:!hover{
+	font-size:14px;
+	color:gray;
+	font-family:Î¢ÈíÑÅºÚ;
+	border:0px;
+}
+
+QPushButton#appluadBtn:hover{
+	font-size:14px;
+	color:#0074CC;
+	font-family:Î¢ÈíÑÅºÚ;
+	border:0px;
+	text-decoration:underline;
+}
+QPushButton#appluadBtn:pressed{
+	font-size:14px;
+	color:white;
+	font-family:Î¢ÈíÑÅºÚ;
+	border:0px;
+	text-decoration:underline;
+}
+
+QPushButton#reportBtn:!hover{
+	font-size:14px;
+	color:gray;
+	font-family:Î¢ÈíÑÅºÚ;
+	border:0px;
+}
+QPushButton#reportBtn:hover{
+	font-size:14px;
+	color:#0074CC;
+	font-family:Î¢ÈíÑÅºÚ;
+	border:0px;
+	text-decoration:underline;
+}
+QPushButton#reportBtn:pressed{
+	font-size:14px;
+	color:white;
+	font-family:Î¢ÈíÑÅºÚ;
+	border:0px;
+	text-decoration:underline;
+}

@@ -22,10 +22,15 @@ void Network::socketConnect()
 		return;
 	}
 	m_socket->connectToHost(QHostAddress(m_ip), m_port);
+	int i = 0;
 	while (!m_socket->waitForConnected(200)){
 		qDebug() << "socket连接失败，正在重连…………" << "连接错误信息："
 			<< m_socket->errorString();
 		m_socket->connectToHost(QHostAddress(m_ip), m_port);
+		if (++i > 20){
+			qDebug() << "稍后将进行网络连接";
+			break;
+		}
 	}
 
 }
@@ -37,6 +42,10 @@ void Network::socketDisConnect()
 
 void Network::send(const QByteArray &data)
 {
+	socketConnect();
+	if (m_socket->state() != QAbstractSocket::ConnectedState){
+		return;
+	}
 	m_socket->write(data);
 }
 

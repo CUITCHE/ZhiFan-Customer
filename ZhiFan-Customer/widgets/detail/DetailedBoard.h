@@ -9,18 +9,19 @@
  * 展示知返详细情况的面板
  */
 
-#include <QWidget>
+#include <QDialog>
 
 class DetailedBoardPrivate;
 class PublishOneEntity;
 class PublishBriefOneEntity;
+class QResizeEvent;
 
-class DetailedBoard : public QWidget
+class DetailedBoard : public QDialog
 {
 	Q_OBJECT
 
 public:
-	DetailedBoard(PublishBriefOneEntity *bEntity, PublishOneEntity *dEntity, QWidget *parent = 0);
+	DetailedBoard(const PublishBriefOneEntity *bEntity, const PublishOneEntity *dEntity, QWidget *parent = 0);
 	~DetailedBoard();
 protected:
 	/*!
@@ -28,7 +29,9 @@ protected:
 	 */
 	void initWidget();
 
+	void parseData();
 
+	void initStyle();
 	DetailedBoardPrivate * const d_ptr;
 private:
 	Q_DECLARE_PRIVATE(DetailedBoard);

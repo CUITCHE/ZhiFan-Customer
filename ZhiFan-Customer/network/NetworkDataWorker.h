@@ -20,19 +20,20 @@ class NetworkDataWorker : public QObject
 	Q_OBJECT
 
 public:
-	NetworkDataWorker(QObject *parent);
+	NetworkDataWorker(QObject *parent = 0);
 	~NetworkDataWorker();
 	void sendRequest(const Packet *packet);
 protected:
 	void init();
-	void task(const Packet *packet);
-
+signals:
+	void packetData(const Packet *packet);
+	/*
 	void onServerBack(const Packet *packet);
 	void onResponseGetOneZhiFanPublish(const Packet *packet);
 	void onResponseGetZhiFanPublishPageOfRange(const Packet *packet);
 	void onResponseLogin(const Packet *packet);
 	void onResponsePullUserCenter(const Packet *packet);
-	void onResponseSearchZhiFan(const Packet *packet);
+	void onResponseSearchZhiFan(const Packet *packet);*/
 protected slots:
 	void workForNetdata(const QByteArray& data);
 private:

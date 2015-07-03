@@ -6,14 +6,17 @@
 #include "Utils.h"
 #include "TerminalWidget.h"
 #include <QtWidgets/QApplication>
+#include <QWebView>
 void test(){
-	TerminalWidget *w = new TerminalWidget(QSize{1024,600});
+	
+	TerminalWidget *w = new TerminalWidget(QSize{ 1366, 800 });
 	w->show();
 }
 
 void test2(){
-	QString str = QString("ÎÒ½Ð%1£¬¼¸Äê%2Ëê").arg("»ÆÀ¤").arg(18);
-	qDebug() << str;
+	QWebView *view = new QWebView;
+	view->load(QUrl("http://127.0.0.1/user-center.html"));
+	view->show();
 }
 int main(int argc, char *argv[])
 {

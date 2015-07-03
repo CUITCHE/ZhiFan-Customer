@@ -1,76 +1,108 @@
 #include "stdafx.h"
 #include "ImageCarouselFrame.h"
-static auto once = [](){
-	QTime t = QTime::currentTime();
-	qsrand(t.msec() + t.second() * 1000);
-	return true;
-}();
-ImageCarouselFrame::ImageCarouselFrame(const QVector<QImage> &imageData, QWidget *parent)
+
+int timerInterval()
+{
+	static float s_rand[] = { 1.3f, 2.0f, 2.4f, 2.9f, 3.4f, 1.4f, 1.9f, 2.8f, 3.1, 1.8f, 4.1f, 5.0f, 4.2f, 2.5f, 1.0f };
+	static int index = -1;
+	index = ++index % (sizeof(s_rand) / sizeof(float));
+	qDebug() << s_rand[index];
+	return 15*1000 * s_rand[index];
+}
+
+struct ImageCarouselFramePrivate
+{
+	QVector<QLabel*> *labels=0;
+	QTimer *timer=0;
+	int index = 0;
+	QPropertyAnimation *animation=0;
+	int interval;
+	static QSize labelSize;
+	
+	~ImageCarouselFramePrivate(){
+		for (auto &val : *labels){
+			delete val;
+		}
+		delete labels;
+		delete timer;
+		delete animation;
+	}
+};
+QSize ImageCarouselFramePrivate::labelSize = { 300, 400 };
+
+ImageCarouselFrame::ImageCarouselFrame(QWidget *parent)
 	:QWidget(parent)
-	, labels(new QVector<QLabel *>)
-	, labelSize(200, 300)
+	, d_ptr(new ImageCarouselFramePrivate)
 {
 	//this->setWindowFlags(Qt::FramelessWindowHint | Qt::WindowSystemMenuHint | Qt::WindowMinimizeButtonHint);
-	setAttribute(Qt::WA_TranslucentBackground, true); //【1】
-	setWindowFlags(Qt::FramelessWindowHint); //把窗口设置成没框架的
-
-	initWidget(imageData);
+	//setAttribute(Qt::WA_TranslucentBackground, true); //【1】
+	//setWindowFlags(Qt::FramelessWindowHint); //把窗口设置成没框架的
 }
 
 ImageCarouselFrame::~ImageCarouselFrame()
 {
-	timer->stop();
-	animation->stop();
+	Q_D(ImageCarouselFrame);
+	if (d->timer){
+		d->timer->stop();
+	}
+	if (d->animation){
+		d->animation->stop();
+	}
+	delete d_ptr;
 }
 
-int timerInterval()
-{
-	return qrand() % 1500 + 2000;
-}
 
-
-void ImageCarouselFrame::initWidget(const QVector<QImage> &imageData)
+void ImageCarouselFrame::initWidget(const QVector<QPixmap> *imageData)
 {
+	Q_D(ImageCarouselFrame);
+
 	QLabel *p = 0;
 	int i = 0;
-	for (auto &val : imageData){
+	d->labels = new QVector < QLabel* > ;
+	d->labels->reserve(imageData->size());
+	for (auto &val : *imageData){
 		p = new QLabel(this);
-		p->setFixedSize(labelSize);
+		p->setFixedSize(d->labelSize);
 		p->hide();
-		p->setPixmap(QPixmap::fromImage(val).scaled(labelSize));
-		labels->push_back(p);
+		p->setPixmap(val.scaled(d->labelSize));
+		d->labels->push_back(p);
 	}
-	if (labels->size() > 1){
-		timer = new QTimer(this);
-		timer->start(timerInterval());
-		connect(timer, &QTimer::timeout, this, &ImageCarouselFrame::onTimerSwitchImage);
+	if (d->labels->size() > 1){
+		d->timer = new QTimer(this);
+		d->interval = timerInterval();
+		d->timer->start(d->interval);
+		connect(d->timer, &QTimer::timeout, this, &ImageCarouselFrame::onTimerSwitchImage);
 
 #define __duration (1 * 800)
-		animation = new QPropertyAnimation(labels->at(0), "geometry");
-		animation->setDuration(__duration);
-		connect(animation, &QPropertyAnimation::finished, this, &ImageCarouselFrame::onAnimationFinished);
+		d->animation = new QPropertyAnimation(d->labels->at(0), "geometry");
+		d->animation->setDuration(__duration);
+		connect(d->animation, &QPropertyAnimation::finished, this, &ImageCarouselFrame::onAnimationFinished);
 #undef __duration
 	}
-	labels->first()->show();
+	d->labels->first()->show();
 }
 
 void ImageCarouselFrame::onTimerSwitchImage()
 {
-	index = ++index % (labels->size());
+	Q_D(ImageCarouselFrame);
+
+	d->index = ++d->index % (d->labels->size());
 	
-	animation->stop();
+	d->animation->stop();
 	startAnimation();
-	if (index == 0){
-		labels->at(labels->size() - 1)->hide();
+	if (d->index == 0){
+		d->labels->at(d->labels->size() - 1)->hide();
 	}
-	labels->at(index)->show();
+	d->labels->at(d->index)->show();
 }
 
 void ImageCarouselFrame::startAnimation()
 {
+	Q_D(ImageCarouselFrame);
+
 	static char increament = -1;
 	increament = ++increament % 4;
-	animation->setTargetObject(labels->at(index));
+	d->animation->setTargetObject(d->labels->at(d->index));
 	switch (increament)
 	{
 	case 0:
@@ -86,63 +118,79 @@ void ImageCarouselFrame::startAnimation()
 		fromRightToLeft();
 		break;
 	}
-	animation->start();
+	d->animation->start();
 }
 
 void ImageCarouselFrame::fromTopToBottom()
 {
-	animation->setStartValue(QRect({ 0, -labelSize.height() }, labelSize));
-	animation->setEndValue(QRect({ 0, 0 }, labelSize));
-	animation->setEasingCurve(QEasingCurve::OutBounce);
+	Q_D(ImageCarouselFrame);
+
+	d->animation->setStartValue(QRect({ 0, -d->labelSize.height() }, d->labelSize));
+	d->animation->setEndValue(QRect({ 0, 0 }, d->labelSize));
+	d->animation->setEasingCurve(QEasingCurve::OutBounce);
 }
 
 void ImageCarouselFrame::fromBottomToTop()
 {
-	animation->setStartValue(QRect({ 0, labelSize.height() * 2 }, labelSize));
-	animation->setEndValue(QRect({ 0, 0 }, labelSize));
-	animation->setEasingCurve(QEasingCurve::OutQuad);
+	Q_D(ImageCarouselFrame);
+	d->animation->setStartValue(QRect({ 0, d->labelSize.height() * 2 }, d->labelSize));
+	d->animation->setEndValue(QRect({ 0, 0 }, d->labelSize));
+	d->animation->setEasingCurve(QEasingCurve::OutQuad);
 }
 
 void ImageCarouselFrame::fromLeftToRight()
 {
-	animation->setStartValue(QRect({ -labelSize.width(), 0 }, labelSize));
-	animation->setEndValue(QRect({ 0, 0 }, labelSize));
-	animation->setEasingCurve(QEasingCurve::InOutBack);
+	Q_D(ImageCarouselFrame);
+	d->animation->setStartValue(QRect({ -d->labelSize.width(), 0 }, d->labelSize));
+	d->animation->setEndValue(QRect({ 0, 0 }, d->labelSize));
+	d->animation->setEasingCurve(QEasingCurve::InOutBack);
 }
 
 void ImageCarouselFrame::fromRightToLeft()
 {
-	animation->setStartValue(QRect({ labelSize.width() * 2, 0 }, labelSize));
-	animation->setEndValue(QRect({ 0, 0 }, labelSize));
-	animation->setEasingCurve(QEasingCurve::OutInBack);
+	Q_D(ImageCarouselFrame);
+	d->animation->setStartValue(QRect({ d->labelSize.width() * 2, 0 }, d->labelSize));
+	d->animation->setEndValue(QRect({ 0, 0 }, d->labelSize));
+	d->animation->setEasingCurve(QEasingCurve::OutInBack);
 }
 
 void ImageCarouselFrame::onAnimationFinished()
 {
-	for (int i = 0; i < labels->size();++i){
-		if (i != index){
-			labels->at(i)->hide();
+	Q_D(ImageCarouselFrame);
+
+	for (int i = 0; i < d->labels->size(); ++i){
+		if (i != d->index){
+			d->labels->at(i)->hide();
 		}
 	}
 }
-
+/*
 void ImageCarouselFrame::resizeEvent(QResizeEvent *event)
 {
+	Q_D(ImageCarouselFrame);
 	auto size = event->size();
-	labelSize = size;
+	d->labelSize = size;
 	this->setFixedSize(size);
-	auto &datas = *labels;
+	auto &datas = *d->labels;
 	for (auto &val : datas){
 		val->setFixedSize(size);
+		//val->setPixmap(val->pixmap()->scaled(size));
 	}
-}
+}*/
 
 void ImageCarouselFrame::setTimerOn(bool on /*= true*/)
 {
-	if (on && !timer->isActive()){
-		timer->stop();
+	Q_D(ImageCarouselFrame);
+
+	if (on == true && d->timer->isActive() == true){
+		d->timer->stop();
 	}
-	else{
-		timer->start(timerInterval());
+	else if(on == false && d->timer->isActive() == false) {
+		d->timer->start(d->interval);
 	}
+}
+
+void ImageCarouselFrame::setFrameSize(const QSize &frameSize)
+{
+	ImageCarouselFramePrivate::labelSize = frameSize;
 }

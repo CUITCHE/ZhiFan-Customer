@@ -12,27 +12,30 @@
 #include <QVector>
 #include <QImage>
 
-class QLabel;
-class QTimer;
-class QResizeEvent;
-class QPropertyAnimation;
+class ImageCarouselFramePrivate;
 
 class ImageCarouselFrame : public QWidget
 {
 	Q_OBJECT
 
 public:
-	ImageCarouselFrame(const QVector<QImage> &imageData, QWidget *parent = 0);
+	ImageCarouselFrame(QWidget *parent = 0);
 	~ImageCarouselFrame();
 
 	/*
 	 @param: on 是否启动图片轮播
 	*/
 	void setTimerOn(bool on = true);
+	/*
+	 @param frameSize 图片显示的大小
+	 @brief 得在生成之前初始化，不然不行
+	 */
+	static void setFrameSize(const QSize &frameSize);
+
+	void initWidget(const QVector<QPixmap> *imageData);
 protected:
-	void initWidget(const QVector<QImage> &imageData);
 	void startAnimation();
-	void resizeEvent(QResizeEvent *event);
+	/*void resizeEvent(QResizeEvent *event);*/
 protected slots:
 	void onTimerSwitchImage();
 	void onAnimationFinished();
@@ -45,12 +48,10 @@ private:
 	void fromLeftToRight();
 	//从右到左
 	void fromRightToLeft();
+protected:
+	ImageCarouselFramePrivate * const d_ptr;
 private:
-	QVector<QLabel*> *labels;
-	QTimer *timer;
-	int index = 0;
-	QPropertyAnimation *animation;
-	QSize labelSize;
+	Q_DECLARE_PRIVATE(ImageCarouselFrame);
 };
 
 #endif // IMAGECAROUSELFRAME_H

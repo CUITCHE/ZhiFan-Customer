@@ -4,131 +4,195 @@
 #include "ImageCarouselFrame.h"
 #include "MaskFrame.h"
 #include "Utils.h"
+
+struct ZhiFanBriefFramePrivate
+{
+	QVector<QPixmap> *imageData = 0;
+	MaskFrame *maskFrame;	//遮罩，有查看按钮
+	QPropertyAnimation *animationShow = 0;
+	QPropertyAnimation *animationHide = 0;
+
+	//row1
+	QLabel *flagZhiFan;	//标识是“知”，还是“返”
+	QLabel *title;					//标题
+	QLabel *responseNum;			//回答数
+	//row2
+	ImageCarouselFrame *imageShow;	//显示图片，一张图片
+	//row3
+	QLabel *describeMsg;	//描述的节约信息
+	//row4
+	QLabel *responseMuchOfAppluad;	//被点赞最多的回答，扼要信息
+
+	QLabel *bg;
+
+	QVBoxLayout * mainLayout;
+
+	~ZhiFanBriefFramePrivate(){
+		delete mainLayout;
+		delete animationHide;
+		delete animationShow;
+	}
+};
+
 ZhiFanBriefFrame::ZhiFanBriefFrame(const PublishBriefOneEntity *entity, QWidget *parent /*= 0*/)
 	:entity(entity)
 	, QWidget(parent)
-	, mainLayout(new QVBoxLayout)
+	, d_ptr(new ZhiFanBriefFramePrivate)
 {
 	parseImageData();
-	initWidget();
 }
 
 ZhiFanBriefFrame::~ZhiFanBriefFrame()
 {
-
+	delete d_ptr;
 }
-
+void ZhiFanBriefFrame::initStyle()
+{
+	QFile file(":/zhifan.qss");
+	file.open(QFile::ReadOnly);
+	QString style = QString(file.readAll());
+	this->setStyleSheet(style);
+	file.close();
+}
 void ZhiFanBriefFrame::initWidget()
 {
+	Q_D(ZhiFanBriefFrame);
 	//row1
 	QHBoxLayout *row1 = new QHBoxLayout;
-	publisherHeaderImage = new QLabel;
-	publisherName = new QLabel(tr("何先生"));
-	responseNum = new QLabel(tr("%1").arg(5320));
-	row1->addWidget(publisherHeaderImage);
-	row1->addWidget(publisherName);
-	row1->addWidget(responseNum);
+	row1->setAlignment(Qt::AlignBottom);
+	d->flagZhiFan = new QLabel;
+	d->flagZhiFan->setObjectName("flagZhiFan");
+	d->flagZhiFan->setFixedSize(64, 64);
+	QPixmap pixmap(entity->type() == 1 ? ":/zhi.png" : ":/fan.png");
+	d->flagZhiFan->setPixmap(pixmap.scaled(64,64));
+
+	d->title = new QLabel(entity->title());	//标题
+	d->title->setObjectName("BriefFrameTitle");
+	d->responseNum = new QLabel(tr("已有%1回复").arg(entity->responseNum()));
+	d->responseNum->setObjectName("responseNum");	//回复数
+
+	row1->setMargin(0);
+	row1->addWidget(d->flagZhiFan, 0, Qt::AlignLeft);
+	row1->addWidget(d->title, 0, Qt::AlignCenter);
 
 	//row2
-	QHBoxLayout *row2 = new QHBoxLayout;
-	imageShow = new ImageCarouselFrame(imageData, this);
-	imageShow->setFixedSize(200, 300);
-	row2->addWidget(imageShow);
+	d->imageShow = new ImageCarouselFrame(this);
+	d->imageShow->setFixedSize(this->width(), this->height()*0.6);
+	d->imageShow->initWidget(d->imageData);
+	delete d->imageData;
+	d->imageData = 0;
 
 	//row3
-	QHBoxLayout *row3 = new QHBoxLayout;
-	describeMsg = new QLabel;
-	describeMsg->setText(entity->briefDesc());
-	row3->addWidget(describeMsg);
+	d->describeMsg = new QLabel;
+	d->describeMsg->setWordWrap(true);
+	d->describeMsg->setObjectName("describeMsg");
+	d->describeMsg->setText("描述：\n"+entity->briefDesc().left(50)+"......");
+	d->describeMsg->setFixedWidth(width());
 
 	//row4
-	QHBoxLayout *row4 = new QHBoxLayout;
-	responseMuchOfAppluad = new QLabel;
-	responseMuchOfAppluad->setText(entity->responseInfo());
-	row4->addWidget(responseMuchOfAppluad);
+	d->responseMuchOfAppluad = new QLabel;
+	d->responseMuchOfAppluad->setWordWrap(true);
+	d->responseMuchOfAppluad->setObjectName("responseMuchOfAppluad");
+	d->responseMuchOfAppluad->setText("精彩回答：\n"+entity->responseInfo().left(50) + "......");
+	d->responseMuchOfAppluad->setFixedWidth(width());
 
-	mainLayout->addLayout(row1);
-	mainLayout->addLayout(row2);
-	mainLayout->addLayout(row3);
-	mainLayout->addLayout(row4);
+	d->mainLayout = new QVBoxLayout;
+	d->mainLayout->setMargin(0);
+	d->mainLayout->addLayout(row1);
+	d->mainLayout->addWidget(d->responseNum, 0, Qt::AlignRight | Qt::AlignBottom);
+	d->mainLayout->setSpacing(3);
+	d->mainLayout->addWidget(d->imageShow);
+	d->mainLayout->setSpacing(2);
+	//d->mainLayout->addLayout(row3);
+	d->mainLayout->addWidget(d->describeMsg);
+	d->mainLayout->setSpacing(2);
+	d->mainLayout->addWidget(d->responseMuchOfAppluad);
 
-	this->setLayout(mainLayout.get());
-	mainLayout->setMargin(0);
+	d->bg = new QLabel(this);
+	d->bg->setFixedSize(size());
+	d->bg->setLayout(d->mainLayout);
+	d->bg->setStyleSheet("background-color: #5299A9");
 
-	maskFrame = new MaskFrame(this);
-	connect(maskFrame, &MaskFrame::tryToLook, this, &ZhiFanBriefFrame::onImageLookDetailed);
-	maskFrame->hide();
+	d->maskFrame = new MaskFrame(this);
+	d->maskFrame->setFixedSize(size());
+	connect(d->maskFrame, &MaskFrame::tryToLook, this, &ZhiFanBriefFrame::onImageLookDetailed);
+	d->maskFrame->hide();
+
+	initStyle();
 }
 
 void ZhiFanBriefFrame::parseImageData()
 {
+	Q_D(ZhiFanBriefFrame);
+
 	auto &imageBase64Data = entity->photo();
-	imageData.reserve(imageBase64Data.size());
+	d->imageData = new QVector < QPixmap > ;
+	d->imageData->reserve(imageBase64Data.size());
 	QByteArray tmpData;
 	QImage image;
 	for (auto &val : imageBase64Data){
 		tmpData = val.toByteArray();
 		utils::ByteArrayToImage(tmpData, image);
-		imageData.push_back(image);
+		d->imageData->push_back(QPixmap::fromImage(image));
 	}
 }
 
 #define __duration (1 * 500)
 void ZhiFanBriefFrame::enterEvent(QEvent *)
 {
-	if (animationShow == 0){
+	Q_D(ZhiFanBriefFrame);
+	if (d->animationShow == 0){
 
-		animationShow = new QPropertyAnimation(maskFrame, "geometry");
-		animationShow->setDuration(__duration);
-		connect(animationShow, &QPropertyAnimation::finished, this, &ZhiFanBriefFrame::onAnimationShowFinished);
-		animationShow->setStartValue(QRect({ maskFrame->pos().x(), -maskFrame->size().height() }, maskFrame->size()));
-		animationShow->setEndValue(QRect({ maskFrame->pos().x(), maskFrame->pos().y() }, maskFrame->size()));
-		animationShow->setEasingCurve(QEasingCurve::InCubic);
+		d->animationShow = new QPropertyAnimation(d->maskFrame, "geometry");
+		d->animationShow->setDuration(__duration);
+		connect(d->animationShow, &QPropertyAnimation::finished, this, &ZhiFanBriefFrame::onAnimationShowFinished);
+		d->animationShow->setStartValue(QRect({ d->maskFrame->pos().x(), -d->maskFrame->size().height() }, d->maskFrame->size()));
+		d->animationShow->setEndValue(QRect({ d->maskFrame->pos().x(), d->maskFrame->pos().y() }, d->maskFrame->size()));
+		d->animationShow->setEasingCurve(QEasingCurve::InCubic);
 	}
-	animationShow->stop();
-	animationHide ? animationHide->stop() : 0;
+	d->animationShow->stop();
+	d->animationHide ? d->animationHide->stop() : 0;
 
-	maskFrame->showOne();
-	animationShow->start();
+	d->maskFrame->showOne();
+	d->animationShow->start();
 }
 
 void ZhiFanBriefFrame::leaveEvent(QEvent *)
 {
-	animationShow->stop();
-	if (animationHide == 0){
+	Q_D(ZhiFanBriefFrame);
+	d->animationShow->stop();
+	if (d->animationHide == 0){
 
-		animationHide = new QPropertyAnimation(maskFrame, "geometry");
-		animationHide->setDuration(__duration);
-		connect(animationHide, &QPropertyAnimation::finished, this, &ZhiFanBriefFrame::onAnimationHideFinished);
-		animationHide->setStartValue(QRect({ maskFrame->pos().x(), maskFrame->pos().y() }, maskFrame->size()));
-		animationHide->setEndValue(QRect({ maskFrame->pos().x(), -maskFrame->size().height() }, maskFrame->size()));
-		animationHide->setEasingCurve(QEasingCurve::OutCubic);
+		d->animationHide = new QPropertyAnimation(d->maskFrame, "geometry");
+		d->animationHide->setDuration(__duration);
+		connect(d->animationHide, &QPropertyAnimation::finished, this, &ZhiFanBriefFrame::onAnimationHideFinished);
+		d->animationHide->setStartValue(QRect({ d->maskFrame->pos().x(), d->maskFrame->pos().y() }, d->maskFrame->size()));
+		d->animationHide->setEndValue(QRect({ d->maskFrame->pos().x(), -d->maskFrame->size().height() }, d->maskFrame->size()));
+		d->animationHide->setEasingCurve(QEasingCurve::OutCubic);
 	}
-	animationHide->stop();
-	animationHide->start();
+	d->animationHide->stop();
+	d->animationHide->start();
 }
 #undef __duration
 void ZhiFanBriefFrame::onImageLookDetailed()
 {
-	emit havealook(entity->publishId());
+	emit havealook(entity);
 }
 
 void ZhiFanBriefFrame::onAnimationHideFinished()
 {
-	maskFrame->hide();
+	Q_D(ZhiFanBriefFrame);
+	d->maskFrame->hide();
 }
 
 void ZhiFanBriefFrame::onAnimationShowFinished()
 {
-	maskFrame->showAll();
+	Q_D(ZhiFanBriefFrame);
+	d->maskFrame->showAll();
 }
 
 void ZhiFanBriefFrame::setImageCarouselState(bool on /*= true*/)
 {
-	imageShow->setTimerOn(on);
-}
-
-void ZhiFanBriefFrame::resizeEvent(QResizeEvent *event)
-{
-	maskFrame->setFixedSize(event->size());
+	Q_D(ZhiFanBriefFrame);
+	d->imageShow->setTimerOn(on);
 }

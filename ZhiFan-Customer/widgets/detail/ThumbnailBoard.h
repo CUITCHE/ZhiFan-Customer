@@ -26,9 +26,9 @@ signals:
 protected:
 	void initWidget(QList<QPixmap> &);
 
-	//ThumbnailBoardPrivate * const d_ptr;
+	ThumbnailBoardPrivate * const d_ptr;
 private:
-	//Q_DECLARE_PRIVATE(ThumbnailBoard);
+	Q_DECLARE_PRIVATE(ThumbnailBoard);
 }; 
 
 #endif // THUMBNAILBOARD_H

@@ -10,6 +10,7 @@
  */
 #include <QWidget>
 class ImageBoardPrivate;
+class QResizeEvent;
 
 class ImageBoard : public QWidget
 {
@@ -23,7 +24,7 @@ protected slots:
 	void onThumbnailBoardClicked(int tag);
 protected:
 	void initWidget(QList<QPixmap> &images);
-
+	void resizeEvent(QResizeEvent *event);
 	ImageBoardPrivate * const d_ptr;
 private:
 	Q_DECLARE_PRIVATE(ImageBoard);

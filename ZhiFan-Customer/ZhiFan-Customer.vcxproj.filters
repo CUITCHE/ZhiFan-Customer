@@ -378,6 +378,15 @@
     <ClCompile Include="widgets\detail\CommentBoard.cpp">
       <Filter>widgets\detail</Filter>
     </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_CommentBoardItem.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_CommentBoardItem.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="widgets\detail\CommentBoardItem.cpp">
+      <Filter>widgets\detail</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="network\InstantiationPacketHelper.h">
@@ -547,8 +556,16 @@
     <CustomBuild Include="widgets\detail\CommentBoard.h">
       <Filter>widgets\detail</Filter>
     </CustomBuild>
+    <CustomBuild Include="widgets\detail\CommentBoardItem.h">
+      <Filter>widgets\detail</Filter>
+    </CustomBuild>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="ZhiFan-Customer.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\zhifan.qss">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
 </Project>

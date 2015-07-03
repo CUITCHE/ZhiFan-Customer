@@ -2,12 +2,14 @@
 #include "DisplayZhiFanBoard.h"
 #include "ZhiFanBriefFrame.h"
 #include "DisplayBoardItemsForColumn.h"
+#include "DetailedBoard.h"
+#include "PublishBriefOneEntity.h"
+#include "PublishOneEntity.h"
 
-
-const int itemWidth = 200;
-const int itemHeight = 400;
-const int hspace = 10;
-const int vspace = 10;
+const int itemWidth = 300;
+const int itemHeight = 500;
+const int hspace = 30;
+const int vspace = 50;
 
 struct DisplayZhiFanBoardPrivate
 {
@@ -18,6 +20,14 @@ struct DisplayZhiFanBoardPrivate
 	int maxColumnNum = 0;
 	QScrollArea *scrollArea;
 	QWidget *board;
+	~DisplayZhiFanBoardPrivate(){
+		for (auto &val : *frameList){
+			delete val;
+		}
+		delete frameList;
+		delete board;
+		delete scrollArea;
+	}
 
 };
 
@@ -30,7 +40,7 @@ DisplayZhiFanBoard::DisplayZhiFanBoard(QWidget *parent /*= 0*/, int columns /*= 
 
 DisplayZhiFanBoard::~DisplayZhiFanBoard()
 {
-	
+	delete d_ptr;
 }
 
 void DisplayZhiFanBoard::initColumnWidget(int columns)
@@ -41,9 +51,10 @@ void DisplayZhiFanBoard::initColumnWidget(int columns)
 	d->board = new QWidget(this);
 	d->scrollArea = new QScrollArea(this);
 	d->scrollArea->setWidget(d->board);
-	//设置滚动条只能垂直滚动
+	//
 	d->scrollArea->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-	d->scrollArea->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
+	d->scrollArea->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+	connect(d->scrollArea->verticalScrollBar(), &QScrollBar::valueChanged, this, &DisplayZhiFanBoard::onScrollValueChanged);
 	d->frameList = new QList < ZhiFanBriefFrame * > ;
 	//先申请20个frame的预留空间备用
 	d->frameList->reserve(20);
@@ -52,18 +63,22 @@ void DisplayZhiFanBoard::initColumnWidget(int columns)
 void DisplayZhiFanBoard::addItem(const PublishBriefOneEntity *entity)
 {
 	static QWidget* lastRowFrameForColumn[] = { 0, 0, 0, 0 };
+
 	Q_D(DisplayZhiFanBoard);
 	d->curParseColumn = ++d->curParseColumn % d->maxColumnNum;
 	
 	d->curParseRow = d->frameList->size() / d->maxColumnNum;
 
 	ZhiFanBriefFrame * frame = new ZhiFanBriefFrame(entity, d->board);
-	frame->show();
 	frame->setFixedSize(itemWidth, itemHeight);
+	frame->initWidget();
+	connect(frame, &ZhiFanBriefFrame::havealook, this, &DisplayZhiFanBoard::onBriefBordClicked);
+	frame->show();
+	
 	d->frameList->push_back(frame);
 
 	if (d->curParseRow == 0){
-		int xpos = (itemWidth + hspace) * d->curParseColumn;
+		int xpos = (itemWidth + hspace) * d->curParseColumn+20;
 		d->curParseColumn % 2 ? frame->move(xpos, 0) : frame->move(xpos, 30);
 		lastRowFrameForColumn[d->curParseColumn] = frame;
 	}
@@ -90,5 +105,18 @@ void DisplayZhiFanBoard::resizeEvent(QResizeEvent *event)
 	Q_D(DisplayZhiFanBoard);
 	d->board->setFixedSize(event->size());
 	d->scrollArea->setFixedSize(event->size());
+}
+
+void DisplayZhiFanBoard::onScrollValueChanged(int changed)
+{
+	Q_D(DisplayZhiFanBoard);
+	qDebug() << d->scrollArea->verticalScrollBar()->value();
+	qDebug() << "知返size：" << d->frameList->first()->size();
+}
+
+void DisplayZhiFanBoard::onBriefBordClicked(const PublishBriefOneEntity *eb)
+{
+	DetailedBoard *widget = new DetailedBoard(eb, 0,this);
+	widget->show();
 }
 

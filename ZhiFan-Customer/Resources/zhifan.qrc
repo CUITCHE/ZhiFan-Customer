@@ -3,5 +3,16 @@
         <file>0.jpg</file>
         <file>1.jpg</file>
         <file>2.jpg</file>
+        <file>background.png</file>
+        <file>msg.png</file>
+        <file>zhifan.qss</file>
+        <file>logo.png</file>
+        <file>closeBtn.png</file>
+        <file>extendBtn.png</file>
+        <file>narrowBtn.png</file>
+        <file>user.png</file>
+        <file>fan.png</file>
+        <file>zhi.png</file>
+        <file>bg2.png</file>
     </qresource>
 </RCC>

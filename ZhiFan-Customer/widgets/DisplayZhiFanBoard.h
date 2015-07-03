@@ -13,10 +13,8 @@
 #include <QList>
 #include <memory>
 
-class ZhiFanBriefFrame;
 class PublishBriefOneEntity;
 class DisplayBoardItemsForColumn;
-class QScrollArea;
 class QResizeEvent;
 class DisplayZhiFanBoardPrivate;
 
@@ -35,6 +33,9 @@ public:
 protected:
 	void initColumnWidget(int columns);
 	void resizeEvent(QResizeEvent *event);
+protected slots:
+	void onScrollValueChanged(int changed);
+	void onBriefBordClicked(const PublishBriefOneEntity *);
 protected:
 	DisplayZhiFanBoardPrivate * const d_ptr;
 private:

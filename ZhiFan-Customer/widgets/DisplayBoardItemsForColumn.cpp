@@ -66,7 +66,7 @@ void DisplayBoardItemsForColumn::setItemSpace(int space /*= 10*/)
 
 void DisplayBoardItemsForColumn::show()
 {
-	if (distribution = true){
+	if (distribution == true){
 		itemDistributionChanged();
 	}
 	QWidget::show();

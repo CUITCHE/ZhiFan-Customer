@@ -9,19 +9,33 @@ MaskFrame::MaskFrame(QWidget *parent)
 
 MaskFrame::~MaskFrame()
 {
-
+	delete lookOverBtn;
+	delete maskLabel;
 }
 
 void MaskFrame::initWidget()
 {
-	lookOverBtn = new QPushButton(tr("查看"),this);
-	connect(lookOverBtn, &QPushButton::clicked, this, &MaskFrame::onBtnClicked);
-
 	maskLabel = new QLabel(this);
 	maskLabel->setAutoFillBackground(true);
-	QPalette pal = palette();
+	QPalette pal;
 	pal.setColor(QPalette::Background, QColor(0, 0, 0, 255 * 0.4));
 	maskLabel->setPalette(pal);
+
+	lookOverBtn = new QPushButton(tr("查看"), this);
+	QPalette pal2;
+	pal2.setBrush(QPalette::Shadow, QColor(0,0,0,100));
+	lookOverBtn->setPalette(pal2);
+	lookOverBtn->setStyleSheet(
+		"background:#3E97C5; "
+		"border-radius:5px;"
+		"border:2px solid #aaaaaa;"
+		"height:30px;"
+		"width:100px;"
+		"color:white;"
+		"font-size:18px;"
+		"font-family:微软雅黑; "
+		);
+	connect(lookOverBtn, &QPushButton::clicked, this, &MaskFrame::onBtnClicked);
 }
 
 void MaskFrame::enterEvent(QEvent *event)
@@ -37,8 +51,8 @@ void MaskFrame::leaveEvent(QEvent *event)
 void MaskFrame::resizeEvent(QResizeEvent *event)
 {
 	auto size = event->size();
-	lookOverBtn->move((size.width() - lookOverBtn->width()/2) / 2, (size.height() - lookOverBtn->height()/2) / 2);
 	maskLabel->setGeometry({ { 0, 0 }, size });
+	lookOverBtn->move((size.width() - lookOverBtn->width()/2) / 2, (size.height() - lookOverBtn->height()/2) / 2);
 }
 
 void MaskFrame::onBtnClicked()
