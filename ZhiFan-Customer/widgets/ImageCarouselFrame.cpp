@@ -7,7 +7,7 @@ int timerInterval()
 	static int index = -1;
 	index = ++index % (sizeof(s_rand) / sizeof(float));
 	qDebug() << s_rand[index];
-	return 15*1000 * s_rand[index];
+	return 1*1000 * s_rand[index];
 }
 
 struct ImageCarouselFramePrivate

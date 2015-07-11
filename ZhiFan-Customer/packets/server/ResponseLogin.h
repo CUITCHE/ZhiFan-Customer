@@ -29,6 +29,7 @@ QT_MOC_MINE_DEFINITION(QString, IDCardSubstring, IDCardSubstring);
 QT_MOC_MINE_DEFINITION(int, zfb, Zfb);
 //userid：int：用户id
 QT_MOC_MINE_DEFINITION(int, userid, Userid);
-
+//userid：QString：用户名
+QT_MOC_MINE_DEFINITION(QString, username, Username);
 PACKET_DEFINITION_END
 #endif // ResponseLogin_H__

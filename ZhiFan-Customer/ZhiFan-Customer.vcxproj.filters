@@ -58,6 +58,11 @@
     <Filter Include="widgets\detail">
       <UniqueIdentifier>{b8a6ebac-f899-4581-a9cd-0131f36d2cd2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Form Files">
+      <UniqueIdentifier>{99349809-55BA-4b9d-BF79-8FDBB0286EB3}</UniqueIdentifier>
+      <Extensions>ui</Extensions>
+      <ParseFiles>true</ParseFiles>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="network\InstantiationPacketHelper.cpp">
@@ -387,6 +392,51 @@
     <ClCompile Include="widgets\detail\CommentBoardItem.cpp">
       <Filter>widgets\detail</Filter>
     </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_LoginBox.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_LoginBox.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="widgets\LoginBox.cpp">
+      <Filter>widgets</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_RegisterBox.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_RegisterBox.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="widgets\RegisterBox.cpp">
+      <Filter>widgets</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_UserData.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_UserData.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="entity\UserData.cpp">
+      <Filter>entity</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_CSendW.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_CSendW.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="widgets\CSendW.cpp">
+      <Filter>widgets</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_VerificationBox.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_VerificationBox.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="widgets\VerificationBox.cpp">
+      <Filter>widgets</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="network\InstantiationPacketHelper.h">
@@ -436,6 +486,12 @@
     </ClInclude>
     <ClInclude Include="utils\Utils.h">
       <Filter>utils</Filter>
+    </ClInclude>
+    <ClInclude Include="GeneratedFiles\ui_CSendW.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GeneratedFiles\ui_VerificationBox.h">
+      <Filter>Generated Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -558,6 +614,27 @@
     </CustomBuild>
     <CustomBuild Include="widgets\detail\CommentBoardItem.h">
       <Filter>widgets\detail</Filter>
+    </CustomBuild>
+    <CustomBuild Include="widgets\LoginBox.h">
+      <Filter>widgets</Filter>
+    </CustomBuild>
+    <CustomBuild Include="widgets\RegisterBox.h">
+      <Filter>widgets</Filter>
+    </CustomBuild>
+    <CustomBuild Include="entity\UserData.h">
+      <Filter>entity</Filter>
+    </CustomBuild>
+    <CustomBuild Include="widgets\CSendW.h">
+      <Filter>widgets</Filter>
+    </CustomBuild>
+    <CustomBuild Include="widgets\CSendW.ui">
+      <Filter>Form Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="widgets\VerificationBox.ui">
+      <Filter>Form Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="widgets\VerificationBox.h">
+      <Filter>widgets</Filter>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>

@@ -22,13 +22,14 @@ public:
 	TerminalWidget(const QSize &frame, QWidget *parent = 0);
 	~TerminalWidget();
 public slots:
-	void sendRequest(const Packet *packet);
+	bool sendRequest(const Packet *packet);
 	void onPacketData(const Packet *packet);
 	void login();
 protected slots:
 	void onQuit();
 	void onMinus();
 	void onExtend();
+	void onPublishBtnClicked();
 protected:
 	void initWidget();
 	void paintEvent(QPaintEvent *event);

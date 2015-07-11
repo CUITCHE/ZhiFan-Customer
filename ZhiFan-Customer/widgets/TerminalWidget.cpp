@@ -5,11 +5,21 @@
 #include "DisplayZhiFanBoard.h"
 #include "Utils.h"
 #include "NetworkDataWorker.h"
-
+#include "LoginBox.h"
+#include "Factory.h"
+#include "UserData.h"
+#include "CSendW.h"
+#include "VerificationBox.h"
+#include <QWebView>
+#include <QWebFrame>
 struct TerminalWidgetPrivate
 {
+	bool loginStatus = 0;
+	VerificationBox *box = 0;
+	UserData *userdata;
+	QWebView *webView = 0;
 	NetworkDataWorker *socket;
-
+	LoginBox *loginbox=0;
 	QSize *originSize;
 	QPoint *lastPoint;
 	//总布局 控制变量声明处
@@ -49,6 +59,7 @@ TerminalWidget::TerminalWidget(const QSize &frame, QWidget *parent /*= 0*/)
 	SingleObject = this;
 	d_ptr->socket = new NetworkDataWorker(this);
 	connect(d_ptr->socket, &NetworkDataWorker::packetData, this, &TerminalWidget::onPacketData);
+	d_ptr->userdata = new UserData(this);
 }
 
 TerminalWidget::~TerminalWidget()
@@ -98,6 +109,9 @@ void TerminalWidget::initWidget()
 	row1->addWidget(d->showUserNameLabel);
 	row1->addSpacing(100);
 
+	d->publishBtn = new QPushButton(tr("发布"));
+	row1->addWidget(d->publishBtn, 0, Qt::AlignBottom | Qt::AlignRight);
+	connect(d->publishBtn, &QPushButton::clicked, this, &TerminalWidget::onPublishBtnClicked);
 	d->userHeaderBtn = new QPushButton;
 	connect(d->userHeaderBtn, &QPushButton::clicked, this, &TerminalWidget::login);
 	d->userHeaderBtn->setObjectName("userHeaderBtn");
@@ -221,10 +235,10 @@ void TerminalWidget::onExtend()
 
 }
 
-void TerminalWidget::sendRequest(const Packet *packet)
+bool TerminalWidget::sendRequest(const Packet *packet)
 {
 	Q_D(TerminalWidget);
-	d->socket->sendRequest(packet);
+	return d->socket->sendRequest(packet);
 }
 
 
@@ -240,12 +254,35 @@ void TerminalWidget::onPacketData(const Packet *packet)
 	case ServerBack:
 		onServerBack(packet);
 		break;
+	case ResponseLogin:
+		onResponseLogin(packet);
+		break;
+	case ResponseGetOneZhiFanPublish:
+		onResponseGetOneZhiFanPublish(packet);
+		break;
+	case ResponseGetZhiFanPublishPageOfRange:
+		onResponseGetZhiFanPublishPageOfRange(packet);
+		break;
 	}
 }
 void TerminalWidget::onServerBack(const Packet *packet)
 {
 	auto pck = dynamic_cast<const ServerBackPacket*>(packet);
 	QMessageBox::information(this, "信息", pck->getMsg());
+	if (pck->getStatus() == 0){
+		Q_D(TerminalWidget);
+		switch (pck->getOperator())
+		{
+		case Login:
+			d->userdata->_pwd = d->loginbox->pwd();
+			d->loginStatus = true;
+			d->loginbox->success();
+			break;
+		case Register:
+			d->loginbox->registerSuccess();
+			break;
+		}
+	}
 }
 
 void TerminalWidget::onResponseGetOneZhiFanPublish(const Packet *packet)
@@ -258,9 +295,15 @@ void TerminalWidget::onResponseGetZhiFanPublishPageOfRange(const Packet *packet)
 	auto pck = dynamic_cast<const ResponseGetZhiFanPublishPageOfRangePacket*>(packet);
 }
 
+/*更新用户信息实体*/
 void TerminalWidget::onResponseLogin(const Packet *packet)
 {
 	auto pck = dynamic_cast<const ResponseLoginPacket*>(packet);
+	Q_D(TerminalWidget);
+	d->userdata->account = QString::number(pck->getUserid());
+	auto ins = getInstance(Factory);
+	ins->addUserLoginInfo(packet);
+	d->showUserNameLabel->setText(pck->getUsername());
 }
 
 void TerminalWidget::onResponsePullUserCenter(const Packet *packet)
@@ -271,9 +314,47 @@ void TerminalWidget::onResponsePullUserCenter(const Packet *packet)
 void TerminalWidget::onResponseSearchZhiFan(const Packet *packet)
 {
 	auto pck = dynamic_cast<const ResponseSearchZhiFanPacket*>(packet);
+	Q_D(TerminalWidget);
+	auto ins = getInstance(Factory);
+	for (auto &val : pck->getPublishList()){
+		ins->addPublishBrief(&val);
+		auto iter = ins->publishBrief->find(val.getPublishId());
+		if (iter != ins->publishBrief->end()){
+			d->displayBoard->addItem(iter->second);
+		}
+	}
 }
 
 void TerminalWidget::login()
 {
+	Q_D(TerminalWidget);
+	if (!d->loginbox){
+		d->loginbox = new LoginBox(this);
+	}
+	if (d->loginStatus){
+		if (!d->webView){
+			d->webView = new QWebView(0);
+			d->box = new VerificationBox(0);
+			QObject::connect(d->webView->page()->mainFrame(), &QWebFrame::javaScriptWindowObjectCleared, d->webView, [=](){
+				d->webView->page()->mainFrame()->addToJavaScriptWindowObject("userdata", d->userdata);
+				d->webView->page()->mainFrame()->addToJavaScriptWindowObject("VerificationBox", d->box);
+			});
+			
+		}
+		QUrl url(QString("http://127.0.0.1/user-center.html?userid=%1&token=%2").arg(d->userdata->account).arg(d->userdata->pwd()));
+		qDebug() << url;
+		d->webView->load(url);
+		d->webView->show();
+		return;
+	}
+	d->loginbox->show();
+}
 
+void TerminalWidget::onPublishBtnClicked()
+{
+	CSendW *w = new CSendW(this);
+	connect(w, &CSendW::sigSubmitBtn, this, [=](QStringList &dataFileList){
+		w->close();
+	});
+	w->open();
 }
