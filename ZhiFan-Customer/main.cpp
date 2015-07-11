@@ -7,12 +7,12 @@
 #include "TerminalWidget.h"
 #include <QtWidgets/QApplication>
 #include <QWebView>
+#include <QWebFrame>
 void test(){
 	
 	TerminalWidget *w = new TerminalWidget(QSize{ 1366, 800 });
 	w->show();
 }
-
 void test2(){
 	QWebView *view = new QWebView;
 	view->load(QUrl("http://127.0.0.1/user-center.html"));

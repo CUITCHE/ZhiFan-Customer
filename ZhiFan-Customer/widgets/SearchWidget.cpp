@@ -68,28 +68,8 @@ void SearchWidget::initWidget()
 	connect(cityBox, static_cast<void(QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, &SearchWidget::onComboBoxCurrentIndexChanged);
 }
 
-void SearchWidget::getProviceAndCityAndDistrcitData(const vector<SearchPCD> &pcd)
+void SearchWidget::getProviceAndCityAndDistrcitData(const QVector<SearchPCD> &pcd)
 {
-	/*QComboBox *tmpBox = 0;
-	for (auto &itemText : pcd){
-		switch (itemText.first)
-		{
-		case Province:
-			tmpBox = provinceBox;
-			break;
-		case City:
-			tmpBox = cityBox;
-			break;
-		case District:
-			tmpBox = districtBox;
-			break;
-		default:
-			tmpBox = 0;
-		}
-		if (tmpBox){
-			tmpBox->insertItem(0, itemText.second.second, itemText.second.first);
-		}
-	}*/
 	const Range range{ 0, 3 };
 	QComboBox *tmpArray[] = { provinceBox, cityBox, districtBox };
 	for (auto &val : pcd){

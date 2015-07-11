@@ -50,7 +50,7 @@ public:
 private:
 	Factory();
 	~Factory();
-private:
+public:
 	UserEntity *userEntityInfo = 0;
 	unordered_map<ZhiFanIdType, PublishOneEntity*> *publishInDetail;	//知返内容（详细）
 	unordered_map<ZhiFanIdType, PublishBriefOneEntity*> *publishBrief;	//知返内容（扼要）

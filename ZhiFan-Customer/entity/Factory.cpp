@@ -23,6 +23,7 @@ Factory::~Factory()
 void Factory::addUserLoginInfo(const Packet *pck)
 {
 	if (userEntityInfo != 0){
+		updateUserLoginInfo(pck);
 		return;
 	}
 	userEntityInfo = new UserEntity;

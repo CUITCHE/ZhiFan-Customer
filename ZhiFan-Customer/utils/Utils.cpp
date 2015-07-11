@@ -38,7 +38,7 @@ namespace utils{
 		entity->responseInfo() = "放弃是牺牲本来属于你的，放手是放下那些从来就不是你的。别指望所有的人都能懂你，痛过，才知道如何保护自己；哭过，才知道心痛是什么感觉；傻过，才知道适时的坚持与放弃；爱过，才知道自己其实很脆弱。其实，生活并不需要这么些无谓的执着，没有什么就真的不能割舍。";
 		entity->responseNum() = 52654;
 		QList<PublishBriefOneEntity *> lll;
-		for (int i = 0; i < 1; ++i){
+		for (int i = 0; i < 10; ++i){
 			PublishBriefOneEntity *e = new PublishBriefOneEntity;
 			*e = *entity;
 			lll.push_back(e);

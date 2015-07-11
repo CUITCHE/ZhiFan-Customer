@@ -11,7 +11,6 @@
 #include "ClientDataStructure_defs.h"
 #include <QWidget>
 #include <memory>
-#include <vector>
 using std::vector;
 using std::unique_ptr;
 
@@ -37,7 +36,7 @@ public:
 	SearchWidget(QWidget *parent = 0);
 	~SearchWidget();
 	//获取省市区名字数据，并刷新combbox控件
-	void getProviceAndCityAndDistrcitData(const vector<SearchPCD> &pcd);
+	void getProviceAndCityAndDistrcitData(const QVector<SearchPCD> &pcd);
 protected:
 	void initWidget();
 protected slots:

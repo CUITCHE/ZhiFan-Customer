@@ -9,6 +9,7 @@ Network::Network(const QString& ip, quint16 port, QObject *parent)
 	, m_port(port)
 {
 	socketConnect();
+	connect(m_socket.get(), &QTcpSocket::readyRead, this, &Network::onReadyRead);
 }
 
 Network::~Network()
@@ -23,7 +24,7 @@ void Network::socketConnect()
 	}
 	m_socket->connectToHost(QHostAddress(m_ip), m_port);
 	int i = 0;
-	while (!m_socket->waitForConnected(200)){
+	while (!m_socket->waitForConnected(20)){
 		qDebug() << "socket连接失败，正在重连…………" << "连接错误信息："
 			<< m_socket->errorString();
 		m_socket->connectToHost(QHostAddress(m_ip), m_port);
@@ -40,20 +41,26 @@ void Network::socketDisConnect()
 	m_socket->abort();
 }
 
-void Network::send(const QByteArray &data)
+bool Network::send(const QByteArray &data)
 {
 	socketConnect();
 	if (m_socket->state() != QAbstractSocket::ConnectedState){
-		return;
+		return false;
 	}
 	m_socket->write(data);
+	return true;
 }
 
 void Network::onReadyRead()
 {
 	auto data = m_socket->readAll();
-	qDebug() << data;
-	emit pengdingdata(data);
+	QList<QByteArray> dataList = data.split('}');
+	for (auto &val : dataList){
+		val.append('}');
+		//将处理好的数据，交给其它层
+		emit pengdingdata(val);
+	}
+	
 }
 
 void Network::onDisconnected()

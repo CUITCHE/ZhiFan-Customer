@@ -17,8 +17,8 @@ void Entity::update(const Packet *pck)
 {
 	if (!this->isVaild(QTime::currentTime())){
 		updateTime();
-		this->update_impl(pck);
 	}
+	this->update_impl(pck);
 }
 
 void Entity::updateTime()

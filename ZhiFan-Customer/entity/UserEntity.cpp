@@ -5,7 +5,7 @@
 void UserEntity::update_impl(const Packet *pck)
 {
 	auto p = dynamic_cast<const ResponseLoginPacket*>(pck);
-	Q_ASSERT(!p);
+	Q_ASSERT(p);
 	__lock__;
 	_identification = p->getIdentification();
 	_idCardSubstring = p->getIDCardSubstring();

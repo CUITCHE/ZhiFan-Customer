@@ -6,7 +6,8 @@
  * \author CHE
  * \date 六月 2015
  *
- * 处理业务流程
+ * 根据Network发来的数据，以客户端底层数据格式封装成相应的Packet类
+ * 传递给TerminalWidget类去处理，并进行更下一步的传递
  */
 #include <QObject>
 #include <memory>
@@ -22,7 +23,7 @@ class NetworkDataWorker : public QObject
 public:
 	NetworkDataWorker(QObject *parent = 0);
 	~NetworkDataWorker();
-	void sendRequest(const Packet *packet);
+	bool sendRequest(const Packet *packet);
 protected:
 	void init();
 signals:
